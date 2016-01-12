@@ -4,7 +4,6 @@ redis = require 'fakeredis'
 mongojs = require 'mongojs'
 Datastore = require 'meshblu-core-datastore'
 Cache = require 'meshblu-core-cache'
-TokenManager = require 'meshblu-core-manager-token'
 JobManager = require 'meshblu-core-job-manager'
 DeliverSubscriptions = require '../'
 
