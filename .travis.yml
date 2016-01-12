@@ -5,13 +5,13 @@ services:
 - redis-server
 - mongodb
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
   code_climate:
     repo_token: 68c8d7da59cabe20c137ee0b012e85a60d100f490d7d9490a7a0cf3d36c62a99
 before_script:
@@ -22,7 +22,7 @@ deploy:
   provider: npm
   email: serveradmin@octoblu.com
   api_key:
-    secure: cxj8pzceCX9wg/jBcwwTZUfzuUi/H8d1L+i6iiWto+RR8SOnzS4QdRCl5JygqOkwOvgMDs91l57BQstRaOLcLP+sV4ISgNyq1Ryy9YK5UdZabWJeckd3wiXAL12N94SYFjkZPR9oYX0ZKstkv6lbO3B1rNqTnKHzINBeCwRY6moOkb7Yj+R1inNrRlYQW/50YfjxX4mlKIrGksTSNj0P94/A4argg/i7uFWBDM3dWHul900ukeF4Jam/z9BAtrRPIo3zWmu4EW24oIoEh4DATHWB7ZDemsZQ5HOjJ4BnBJKERsm7LpnwM4TQfdY+lu8KhQqOys6qU9Mna1cwdpD/4+z7ypbrn+fts/1hE/7C5SkcKKrzRlpT19h1ZvSpWm35CeGPHoNuoS2uraCzLIx2ij3PKSnwV/5KI4xoAKrHAoVlTB9iXOCiT3DLu5xtNI6Z5vhqi+0czrgrL7j9yqY55C5C8c6Td0sNdacPCmj+tfdATk9lmMX6xiWZNBrTwS45btoRBGAXvaR1Q/m9uoE6NfzjFXx+iR+DpJ3i4X7z9dJafdlJ2/53CGA/w7dx3xKf7s4rmVQnvAGNtSRdE77bA0295HJlYdY2w/OdQHoX5LLSr5iWhoUN5a3HDMDCkh/8Kkc1fnWF/iNcklE0fdADIQvAh0WqA0dAhSbiGbj8490=
+    secure: AFWYZxLws3Q4tzAbEcWbdpxSapkkgUX/NEKiwpuMcP+RbmfTyS71LJ7mjABH0Hi6vtG8ce7v/CHKn7GAPq46otvHyQS6DGT+JkXoKZgjqtEN3bt9/MX0bkZSdNiDG2UnmB4T9JRID05r7nqSEwG8tqHPZr68aIDUqca00roi2KF6WAvGQIuKxccBkt1DaZ8faCxJA0XDloqDu/Tuym0EplYEoxuk7mLyTZRfp0RjFDRxjynSGn3ujO74miojeVVXRlBMmc4m/5lHRENTHCaJ6f+FA7uKJ1C9loHBijoUGxPXBYYiqSv3T1/7UgEYv4Y53RSJUQUtHRpWSd47LtM+h3P0oyYcd1s2VknJ99c34mUNTdjxOYx6mHdzaGQGEEuQMkFHVYZGRuQP/0Mnk99WEfs/rVGCTnXFASuzt2JY6SEzkHsbNIVNYCE9BVrMtzdqJMBZci8D9C2362YOArb7IcXOdG7JMcGY8rX06WPeCPl+jl/LlldhxEsXjEcXsSWDEQMoqT6o10SdCqNTVsazURz3+DoOUwRMkEReb5Mtv0u2AeB7H73xnzvr7KcDj1YmQCBiYqYU/TIYIn3dm28WKBMD58bKA5hYgNne5v9s0G0As4wpwiheq5FvyDB1/2avhPJRjxmB9PaXUk9TzFae/tFmiNjiFVBAH9DKzDYWKCY=
   on:
     tags: true
     branches: true
