@@ -70,7 +70,7 @@ describe 'DeliverSubscriptions', ->
 
         expect(@response).to.deep.equal expectedResponse
 
-      describe 'JobManager gets DeliverMessage job', (done) ->
+      describe 'JobManager gets DeliverReceivedMessage job', (done) ->
         beforeEach (done) ->
           @jobManager.getRequest ['request'], (error, @request) =>
             done error
@@ -82,7 +82,7 @@ describe 'DeliverSubscriptions', ->
 
           {rawData, metadata} = @request
           expect(metadata.auth).to.deep.equal auth
-          expect(metadata.jobType).to.equal 'DeliverMessage'
+          expect(metadata.jobType).to.equal 'DeliverReceivedMessage'
           expect(metadata.messageType).to.equal 'received'
           expect(metadata.toUuid).to.equal 'subscriber-uuid'
           expect(metadata.fromUuid).to.equal 'emitter-uuid'

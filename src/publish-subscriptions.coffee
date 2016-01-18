@@ -16,7 +16,7 @@ class DeliverSubscriptions
         auth: auth
         toUuid: toUuid
         fromUuid: fromUuid
-        jobType: 'DeliverMessage'
+        jobType: 'DeliverReceivedMessage'
         messageType: messageType
         responseId: uuid.v4()
 
