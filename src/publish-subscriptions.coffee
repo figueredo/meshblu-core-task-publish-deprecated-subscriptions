@@ -53,12 +53,14 @@ class DeliverSubscriptions
 
     message.forwardedFor ?= []
 
-    @uuidAliasResolver.resolve fromUuid, (error, resolvedFromUuid) =>
-      # use the real uuid of the device
-      message.forwardedFor.push resolvedFromUuid
-      message.devices = [subscriberUuid]
-      message.fromUuid = resolvedFromUuid
+    @uuidAliasResolver.resolve toUuid, (error, resolvedToUuid) =>
+      # ignore error
+      @uuidAliasResolver.resolve fromUuid, (error, resolvedFromUuid) =>
+        # use the real uuid of the device
+        message.forwardedFor.push resolvedToUuid
+        message.devices = [subscriberUuid]
+        message.fromUuid = resolvedFromUuid
 
-      @_createJob {toUuid: subscriberUuid, fromUuid: resolvedFromUuid, auth, messageType: 'received', message}, callback
+        @_createJob {toUuid: subscriberUuid, fromUuid: resolvedFromUuid, auth, messageType: 'received', message}, callback
 
 module.exports = DeliverSubscriptions

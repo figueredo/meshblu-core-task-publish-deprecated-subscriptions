@@ -55,6 +55,7 @@ describe 'DeliverSubscriptions', ->
               uuid: 'emitter-uuid'
               token: 'abc123'
             responseId: 'its-electric'
+            toUuid: 'emitter-uuid'
             fromUuid: 'emitter-uuid'
             messageType: 'broadcast'
           rawData: '{"devices":"*"}'
