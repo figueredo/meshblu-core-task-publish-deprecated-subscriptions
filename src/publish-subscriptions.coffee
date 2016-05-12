@@ -42,7 +42,11 @@ class DeliverSubscriptions
   _send: ({auth,toUuid,fromUuid,messageType,message}, callback=->) =>
     return callback null unless messageType == 'broadcast'
 
-    @deviceManager.findOne {uuid: fromUuid}, (error, device) =>
+    projection =
+      uuid: true
+      'meshblu.messageForward': true
+
+    @deviceManager.findOne {uuid: fromUuid, projection}, (error, device) =>
       return callback error if error?
       subscriptions = device?.meshblu?.messageForward
       subscriptions ?= []

@@ -9,11 +9,12 @@ DeliverSubscriptions = require '../'
 
 describe 'DeliverSubscriptions', ->
   beforeEach (done) ->
+    database = mongojs 'subscription-test', ['devices']
     @datastore = new Datastore
-      database: mongojs 'subscription-test'
+      database: database
       collection: 'devices'
 
-    @datastore.remove done
+    database.devices.remove done
 
   beforeEach ->
     @redisKey = uuid.v1()
