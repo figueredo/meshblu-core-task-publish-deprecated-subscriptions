@@ -25,7 +25,8 @@ describe 'DeliverSubscriptions', ->
     @jobManager = new JobManager
       client: _.bindAll redis.createClient @redisKey
       timeoutSeconds: 1
-
+      jobLogSampleRate: 1
+      
     options = {
       pepper: 'totally-a-secret'
       @cache
