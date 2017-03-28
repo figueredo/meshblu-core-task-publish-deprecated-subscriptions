@@ -1,10 +1,10 @@
-_ = require 'lodash'
-uuid = require 'uuid'
-redis = require 'fakeredis'
-mongojs = require 'mongojs'
-Datastore = require 'meshblu-core-datastore'
-Cache = require 'meshblu-core-cache'
-JobManager = require 'meshblu-core-job-manager'
+{describe,beforeEach,it,expect} = global
+uuid                 = require 'uuid'
+redis                = require 'fakeredis'
+mongojs              = require 'mongojs'
+Datastore            = require 'meshblu-core-datastore'
+JobManager           = require 'meshblu-core-job-manager'
+RedisNS              = require '@octoblu/redis-ns'
 DeliverSubscriptions = require '../'
 
 describe 'DeliverSubscriptions', ->
@@ -23,10 +23,10 @@ describe 'DeliverSubscriptions', ->
     @uuidAliasResolver = resolve: (uuid, callback) => callback(null, uuid)
 
     @jobManager = new JobManager
-      client: _.bindAll redis.createClient @redisKey
+      client: new RedisNS 'ns', redis.createClient @redisKey
       timeoutSeconds: 1
       jobLogSampleRate: 1
-      
+
     options = {
       pepper: 'totally-a-secret'
       @cache
@@ -39,7 +39,7 @@ describe 'DeliverSubscriptions', ->
     @sut = new DeliverSubscriptions options
 
   describe '->do', ->
-    context 'when device has messageForward exist', ->
+    describe 'when device has messageForward exist', ->
       beforeEach (done) ->
         record =
           uuid: 'emitter-uuid'
@@ -73,7 +73,7 @@ describe 'DeliverSubscriptions', ->
 
         expect(@response).to.deep.equal expectedResponse
 
-      describe 'JobManager gets DeliverReceivedMessage job', (done) ->
+      describe 'JobManager gets DeliverReceivedMessage job', ->
         beforeEach (done) ->
           @jobManager.getRequest ['request'], (error, @request) =>
             done error
@@ -94,7 +94,7 @@ describe 'DeliverSubscriptions', ->
             forwardedFor:['emitter-uuid']
             fromUuid:'emitter-uuid'
 
-    context 'messageType: sent', ->
+    describe 'messageType: sent', ->
       beforeEach (done) ->
         record =
           uuid: 'emitter-uuid'

@@ -1,12 +1,11 @@
-_ = require 'lodash'
-async = require 'async'
-uuid = require 'uuid'
+async         = require 'async'
+uuid          = require 'uuid'
 DeviceManager = require 'meshblu-core-manager-device'
-http = require 'http'
+http          = require 'http'
 
 class DeliverSubscriptions
   constructor: (options={},dependencies={}) ->
-    {cache,datastore,pepper,@uuidAliasResolver,@jobManager} = options
+    {datastore,@uuidAliasResolver,@jobManager} = options
     @deviceManager ?= new DeviceManager {datastore, @uuidAliasResolver}
 
   _createJob: ({messageType, toUuid, message, fromUuid, auth}, callback) =>
@@ -50,9 +49,9 @@ class DeliverSubscriptions
       return callback error if error?
       subscriptions = device?.meshblu?.messageForward
       subscriptions ?= []
-      async.eachSeries subscriptions, async.apply(@_publishSubscription, {auth,toUuid,fromUuid,messageType,message}), callback
+      async.each subscriptions, async.apply(@_publishSubscription, {auth,toUuid,fromUuid,messageType,message}), callback
 
-  _publishSubscription: ({auth, toUuid, fromUuid, messageType, message}, subscriberUuid, callback) =>
+  _publishSubscription: ({auth, toUuid, fromUuid, message}, subscriberUuid, callback) =>
     message = JSON.parse JSON.stringify(message)
 
     message.forwardedFor ?= []
@@ -65,6 +64,6 @@ class DeliverSubscriptions
         message.devices = [subscriberUuid]
         message.fromUuid = resolvedFromUuid
 
-        @_createJob {toUuid: subscriberUuid, fromUuid: resolvedFromUuid, auth, messageType: 'received', message}, callback
+        @_createJob {toUuid: subscriberUuid,fromUuid:resolvedFromUuid,auth,messageType:'received', message}, callback
 
 module.exports = DeliverSubscriptions

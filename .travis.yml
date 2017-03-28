@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '5'
+- '7'
 services:
 - redis-server
 - mongodb
@@ -12,20 +12,6 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-  code_climate:
-    repo_token: 68c8d7da59cabe20c137ee0b012e85a60d100f490d7d9490a7a0cf3d36c62a99
-before_script:
-- npm install -g codeclimate-test-reporter
-after_script:
-- codeclimate-test-reporter < coverage/lcov.info
-deploy:
-  provider: npm
-  email: serveradmin@octoblu.com
-  api_key:
-    secure: AFWYZxLws3Q4tzAbEcWbdpxSapkkgUX/NEKiwpuMcP+RbmfTyS71LJ7mjABH0Hi6vtG8ce7v/CHKn7GAPq46otvHyQS6DGT+JkXoKZgjqtEN3bt9/MX0bkZSdNiDG2UnmB4T9JRID05r7nqSEwG8tqHPZr68aIDUqca00roi2KF6WAvGQIuKxccBkt1DaZ8faCxJA0XDloqDu/Tuym0EplYEoxuk7mLyTZRfp0RjFDRxjynSGn3ujO74miojeVVXRlBMmc4m/5lHRENTHCaJ6f+FA7uKJ1C9loHBijoUGxPXBYYiqSv3T1/7UgEYv4Y53RSJUQUtHRpWSd47LtM+h3P0oyYcd1s2VknJ99c34mUNTdjxOYx6mHdzaGQGEEuQMkFHVYZGRuQP/0Mnk99WEfs/rVGCTnXFASuzt2JY6SEzkHsbNIVNYCE9BVrMtzdqJMBZci8D9C2362YOArb7IcXOdG7JMcGY8rX06WPeCPl+jl/LlldhxEsXjEcXsSWDEQMoqT6o10SdCqNTVsazURz3+DoOUwRMkEReb5Mtv0u2AeB7H73xnzvr7KcDj1YmQCBiYqYU/TIYIn3dm28WKBMD58bKA5hYgNne5v9s0G0As4wpwiheq5FvyDB1/2avhPJRjxmB9PaXUk9TzFae/tFmiNjiFVBAH9DKzDYWKCY=
-  on:
-    tags: true
-    branches: true
 branches:
   only:
   - "/^v[0-9]/"
@@ -34,3 +20,11 @@ after_success:
 - npm run mocha:json
 - bash <(curl -s https://codecov.io/bash)
 - bash <(curl -s https://codecov.octoblu.com/bash)
+deploy:
+  provider: npm
+  email: serveradmin@octoblu.com
+  api_key:
+    secure: AFWYZxLws3Q4tzAbEcWbdpxSapkkgUX/NEKiwpuMcP+RbmfTyS71LJ7mjABH0Hi6vtG8ce7v/CHKn7GAPq46otvHyQS6DGT+JkXoKZgjqtEN3bt9/MX0bkZSdNiDG2UnmB4T9JRID05r7nqSEwG8tqHPZr68aIDUqca00roi2KF6WAvGQIuKxccBkt1DaZ8faCxJA0XDloqDu/Tuym0EplYEoxuk7mLyTZRfp0RjFDRxjynSGn3ujO74miojeVVXRlBMmc4m/5lHRENTHCaJ6f+FA7uKJ1C9loHBijoUGxPXBYYiqSv3T1/7UgEYv4Y53RSJUQUtHRpWSd47LtM+h3P0oyYcd1s2VknJ99c34mUNTdjxOYx6mHdzaGQGEEuQMkFHVYZGRuQP/0Mnk99WEfs/rVGCTnXFASuzt2JY6SEzkHsbNIVNYCE9BVrMtzdqJMBZci8D9C2362YOArb7IcXOdG7JMcGY8rX06WPeCPl+jl/LlldhxEsXjEcXsSWDEQMoqT6o10SdCqNTVsazURz3+DoOUwRMkEReb5Mtv0u2AeB7H73xnzvr7KcDj1YmQCBiYqYU/TIYIn3dm28WKBMD58bKA5hYgNne5v9s0G0As4wpwiheq5FvyDB1/2avhPJRjxmB9PaXUk9TzFae/tFmiNjiFVBAH9DKzDYWKCY=
+  on:
+    tags: true
+    branches: true
