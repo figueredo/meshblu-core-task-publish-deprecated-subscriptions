@@ -49,7 +49,7 @@ class DeliverSubscriptions
       return callback error if error?
       subscriptions = device?.meshblu?.messageForward
       subscriptions ?= []
-      async.each subscriptions, async.apply(@_publishSubscription, {auth,toUuid,fromUuid,messageType,message}), callback
+      async.eachLimit subscriptions, 100, async.apply(@_publishSubscription, {auth,toUuid,fromUuid,messageType,message}), callback
 
   _publishSubscription: ({auth, toUuid, fromUuid, message}, subscriberUuid, callback) =>
     message = JSON.parse JSON.stringify(message)
